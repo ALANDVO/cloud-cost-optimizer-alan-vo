@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "cloud-cost-optimizer-alan-vo",
+  "owner": "ALANDVO",
+  "email": "alanvo@gmail.com",
+  "domain": "AI-powered cloud cost optimization with multi-cloud analysis, waste detection, right-sizing, and LLM-driven optimization planning",
+  "workflows": [
+    "Create multi-cloud cost analysis (AWS/GCP/Azure) with waste detection and savings estimates",
+    "Ask natural language cost questions and receive LLM-powered insights grounded in actual analysis data",
+    "Generate prioritized optimization plans with monthly savings targets and timeline"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "summary": "Work in progress: cloud-cost-optimizer-alan-vo",
+  "status": "work-in-progress"
+}
