@@ -1,5 +1,8 @@
 # cloud-cost-optimizer-alan-vo
 
+> Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
+
+
 > AI-powered cloud cost analysis for AWS, GCP, and Azure — finds waste, right-sizes instances, analyzes spend trends, and generates optimization plans with estimated savings.
 
 <div align="center">

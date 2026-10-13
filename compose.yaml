@@ -1,0 +1,116 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: cloud-cost-optimizer-backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./data/app.db
+      - DEMO_MODE=true
+      - HOST=0.0.0.0
+      - PORT=8000
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-in-production}
+      - OIDC_ISSUER_URL=${OIDC_ISSUER_URL:-}
+      - OIDC_CLIENT_ID=${OIDC_CLIENT_ID:-}
+      - OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET:-}
+      - OIDC_REDIRECT_URI=${OIDC_REDIRECT_URI:-}
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - LLM_BASE_URL=${LLM_BASE_URL:-https://api.openai.com/v1}
+      - LLM_MODEL=${LLM_MODEL:-gpt-4o}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID:-}
+      - AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID:-}
+    volumes:
+      - backend-data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - cloud-cost-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: cloud-cost-optimizer-frontend
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - VITE_API_BASE_URL=/api
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - cloud-cost-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: cloud-cost-optimizer-keycloak
+    command: start-dev --import-realm
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=keycloak-db
+      - KC_DB_URL_DATABASE=keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=${KEYCLOAK_DB_PASSWORD:-keycloak}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+      - keycloak-data:/opt/keycloak/data
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - cloud-cost-network
+    profiles:
+      - keycloak
+
+  keycloak-db:
+    image: postgres:16-alpine
+    container_name: cloud-cost-optimizer-keycloak-db
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=${KEYCLOAK_DB_PASSWORD:-keycloak}
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - cloud-cost-network
+    profiles:
+      - keycloak
+
+volumes:
+  backend-data:
+  keycloak-data:
+  keycloak-db-data:
+
+networks:
+  cloud-cost-network:
+    driver: bridge
