@@ -25,13 +25,17 @@ Tests: `backend/tests/test_api.py`, `backend/tests/test_models.py`, `backend/tes
 
 ### frontend-core — React + TypeScript + Vite Frontend
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - Dashboard with cost overview
 - Analyze/Waste/Rightsize/Ask/Plan workflows
 - Typed API client derived from backend routes
 - Loading/error/empty states
+
+Implementation: `frontend/src/main.tsx`, `frontend/src/App.tsx`, `frontend/src/pages/Dashboard.tsx`, `frontend/src/pages/Analyses.tsx`, `frontend/src/pages/AnalysisDetail.tsx`, `frontend/src/pages/NewAnalysis.tsx`, `frontend/src/pages/Settings.tsx`, `frontend/src/pages/Login.tsx`, `frontend/src/components/ui.tsx`, `frontend/src/components/Layout.tsx`, `frontend/src/components/OverviewTab.tsx`, `frontend/src/components/WasteTab.tsx`, `frontend/src/components/RightsizeTab.tsx`, `frontend/src/components/AskTab.tsx`, `frontend/src/components/PlanTab.tsx`, `frontend/src/components/RecommendationRow.tsx`, `frontend/src/hooks/useAuth.tsx`, `frontend/src/api/client.ts`, `frontend/src/types/api.ts`, `frontend/src/utils/helpers.ts`, `frontend/src/index.css`, `frontend/vite.config.ts`, `frontend/tsconfig.json`, `frontend/package.json`, `frontend/Dockerfile`
+
+Tests: `frontend/src/pages/__tests__/Dashboard.test.tsx`, `frontend/src/pages/__tests__/Analyses.test.tsx`, `frontend/src/pages/__tests__/AnalysisDetail.test.tsx`, `frontend/src/pages/__tests__/NewAnalysis.test.tsx`
 
 ### auth-sso — OIDC/Keycloak Authentication with SAML Brokering
 

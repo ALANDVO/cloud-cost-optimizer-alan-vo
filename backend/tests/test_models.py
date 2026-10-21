@@ -1,6 +1,6 @@
 # Tests for analysis models
 import pytest
-from datetime import datetime
+from datetime import datetime, timezone
 from backend.app.models.analysis import (
     Analysis, Recommendation, OptimizationPlan,
     CloudProvider, AnalysisStatus, RecommendationType
@@ -36,9 +36,8 @@ def test_analysis_to_dict(db_session):
         status=AnalysisStatus.COMPLETED,
         total_monthly_cost=1000.0,
         potential_monthly_savings=300.0,
-        summary="Test summary",
         llm_insights="LLM insights",
-        completed_at=datetime.utcnow(),
+        completed_at=datetime.now(timezone.utc),
     )
     db_session.add(analysis)
     db_session.commit()
