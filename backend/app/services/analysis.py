@@ -1,5 +1,5 @@
 # Analysis orchestration service
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
 from backend.app.models.analysis import Analysis, Recommendation, OptimizationPlan, CloudProvider, AnalysisStatus, RecommendationType
@@ -123,9 +123,7 @@ class AnalysisService:
             analysis.potential_monthly_savings = total_savings
             analysis.summary = f"Found {len(all_recommendations)} recommendations with ${total_savings:,.2f}/mo potential savings"
             analysis.llm_insights = llm_insights
-            analysis.raw_data = cost_summary
-            analysis.completed_at = datetime.utcnow()
-
+            analysis.completed_at = datetime.now(timezone.utc)
             self.db.commit()
             self.db.refresh(analysis)
             return analysis
