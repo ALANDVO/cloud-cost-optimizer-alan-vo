@@ -1,8 +1,15 @@
 # Changelog
 
+## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.1.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+### Fixed
+- RightsizeTab and AskTab: clear input field after successful submission (UX improvement)
 
 ## 1.0.0 — work-in-progress checkpoint
 

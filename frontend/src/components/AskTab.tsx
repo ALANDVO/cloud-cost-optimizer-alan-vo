@@ -16,6 +16,7 @@ export function AskTab({ completed, onRunAsk, answer, askLoading }: AskTabProps)
     e.preventDefault();
     if (question.trim()) {
       onRunAsk(question.trim());
+      setQuestion('');
     }
   };
 
