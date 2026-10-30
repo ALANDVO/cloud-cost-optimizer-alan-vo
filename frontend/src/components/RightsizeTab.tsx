@@ -15,6 +15,7 @@ export function RightsizeTab({ completed, onRunRightsize, rightsizeResults, righ
     e.preventDefault();
     if (resourceId.trim()) {
       onRunRightsize(resourceId.trim());
+      setResourceId('');
     }
   };
 
