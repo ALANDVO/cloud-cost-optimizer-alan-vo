@@ -123,3 +123,49 @@ export function getProviderColor(provider: string): string {
       return 'text-gray-600 bg-gray-100';
   }
 }
+// Region suggestions per cloud provider
+export const REGION_SUGGESTIONS: Record<string, string[]> = {
+  aws: [
+    'us-east-1', 'us-east-2', 'us-west-1', 'us-west-2',
+    'eu-west-1', 'eu-west-2', 'eu-west-3', 'eu-central-1', 'eu-north-1',
+    'ap-south-1', 'ap-northeast-1', 'ap-northeast-2', 'ap-northeast-3',
+    'ap-southeast-1', 'ap-southeast-2', 'ap-southeast-3',
+    'ca-central-1', 'sa-east-1', 'me-south-1', 'af-south-1',
+  ],
+  gcp: [
+    'us-central1', 'us-east1', 'us-east4', 'us-west1', 'us-west2', 'us-west3', 'us-west4',
+    'europe-west1', 'europe-west2', 'europe-west3', 'europe-west4', 'europe-west6',
+    'europe-west8', 'europe-west9', 'europe-central2', 'europe-north1',
+    'asia-east1', 'asia-east2', 'asia-northeast1', 'asia-northeast2', 'asia-northeast3',
+    'asia-south1', 'asia-south2', 'asia-southeast1', 'asia-southeast2',
+    'australia-southeast1', 'australia-southeast2',
+    'northamerica-northeast1', 'northamerica-northeast2',
+    'southamerica-east1', 'southamerica-west1',
+    'me-west1', 'me-central1', 'me-central2',
+    'africa-south1',
+  ],
+  azure: [
+    'eastus', 'eastus2', 'westus', 'westus2', 'westus3', 'centralus',
+    'northcentralus', 'southcentralus', 'westcentralus',
+    'northeurope', 'westeurope', 'francecentral', 'germanywestcentral',
+    'swedencentral', 'norwayeast', 'switzerlandnorth', 'ukwest', 'uksouth',
+    'eastasia', 'southeastasia', 'japaneast', 'japanwest',
+    'koreacentral', 'koreasouth',
+    'australiaeast', 'australiasoutheast', 'australiacentral', 'australiacentral2',
+    'brazilsouth', 'brazilsoutheast',
+    'canadacentral', 'canadaeast',
+    'centralindia', 'southindia', 'westindia',
+    'qatarcentral', 'uaenorth', 'israelcentral',
+    'southafricanorth', 'southafricawest',
+  ],
+};
+
+export function getRegionSuggestions(provider: string): string[] {
+  return REGION_SUGGESTIONS[provider] ?? [];
+}
+
+export function validateRegion(provider: string, region: string): boolean {
+  const suggestions = REGION_SUGGESTIONS[provider];
+  if (!suggestions) return true; // Unknown provider, allow any region
+  return suggestions.includes(region);
+}

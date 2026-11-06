@@ -1,6 +1,20 @@
 # Changelog
 
+## 1.3.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
+### Added
+- Region suggestions and validation per cloud provider in New Analysis form (AWS, GCP, Azure)
+- HTML5 datalist autocomplete for region input with provider-specific regions
+- Client-side validation to prevent submitting invalid regions
+
+### Tests
+- Added test for invalid region validation in NewAnalysis component
 
 Partial code published for continued development. Known issues: STATUS.md.
 

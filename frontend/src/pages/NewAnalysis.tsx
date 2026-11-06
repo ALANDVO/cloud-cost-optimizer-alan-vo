@@ -5,6 +5,7 @@ import { api } from '../api/client';
 import { Card, Button, Input, Select, PageHeader, ErrorState } from '../components/ui';
 import { Cloud, BarChart3 } from 'lucide-react';
 import type { CloudProvider, AnalysisCreate } from '../types/api';
+import { getRegionSuggestions, validateRegion } from '../utils/helpers';
 
 const PROVIDERS: { value: CloudProvider; label: string }[] = [
   { value: 'aws', label: 'AWS' },
@@ -27,6 +28,10 @@ export function NewAnalysis() {
       setError('Region is required');
       return;
     }
+    if (!validateRegion(provider, region.trim())) {
+      setError(`Invalid region for ${provider.toUpperCase()}. Please select a valid region.`);
+      return;
+    }
     try {
       setSubmitting(true);
       const payload: AnalysisCreate = { cloud_provider: provider, region: region.trim(), days };
@@ -38,6 +43,8 @@ export function NewAnalysis() {
       setSubmitting(false);
     }
   };
+
+  const regionSuggestions = getRegionSuggestions(provider);
 
   return (
     <div className="space-y-6">
@@ -62,7 +69,13 @@ export function NewAnalysis() {
             value={region}
             onChange={(e) => setRegion(e.target.value)}
             required
+            list={`region-suggestions-${provider}`}
           />
+          <datalist id={`region-suggestions-${provider}`}>
+            {regionSuggestions.map((r) => (
+              <option key={r} value={r} />
+            ))}
+          </datalist>
           <Input
             label="Days of history"
             type="number"
