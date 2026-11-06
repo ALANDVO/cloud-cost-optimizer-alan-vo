@@ -13,3 +13,16 @@ build/
 .DS_Store
 frontend/node_modules/
 frontend/dist/
+.turbo/
+.env.local
+.env.*.local
+**/data/media/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm

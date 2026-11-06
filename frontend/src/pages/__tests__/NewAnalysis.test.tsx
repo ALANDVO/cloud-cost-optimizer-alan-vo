@@ -91,4 +91,16 @@ describe('NewAnalysis', () => {
       expect(screen.getByTestId('detail')).toHaveTextContent('Detail for analysis 42');
     });
   });
+  it('prevents submission with invalid region', async () => {
+    renderWithRouter(<NewAnalysis />);
+
+    const region = screen.getByLabelText('Region');
+    fireEvent.change(region, { target: { value: 'invalid-region-123' } });
+
+    const form = screen.getByRole('button', { name: 'Start Analysis' }).closest('form')!;
+    fireEvent.submit(form);
+
+    expect(await screen.findByText('Invalid region for AWS. Please select a valid region.')).toBeInTheDocument();
+    expect(mockedApi.createAnalysis).not.toHaveBeenCalled();
+  });
 });
