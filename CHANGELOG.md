@@ -64,3 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JWT tokens signed with configurable secret; HttpOnly SameSite cookies for session management
 - CSRF protection on state-changing operations
 - No hardcoded secrets; all credentials via environment variables
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

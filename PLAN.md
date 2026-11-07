@@ -67,3 +67,6 @@ Acceptance:
 - README with architecture diagram and API reference
 - LICENSE with correct copyright
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
