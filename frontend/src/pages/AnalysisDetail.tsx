@@ -36,7 +36,7 @@ export function AnalysisDetail() {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
 
   // Rightsize form state
-  const [rightsizeResults, setRightsizeResults] = useState<unknown[]>([]);
+  const [rightsizeResults, setRightsizeResults] = useState<Analysis['recommendations']>([]);
   const [rightsizeLoading, setRightsizeLoading] = useState(false);
 
   // Ask form state
@@ -94,7 +94,7 @@ export function AnalysisDetail() {
       const results = await api.getRightsizeRecommendations(analysisId, id);
       setRightsizeResults(results);
     } catch (err) {
-      setRightsizeResults([{ error: err instanceof Error ? err.message : 'Failed' }]);
+      setRightsizeResults([{ error: err instanceof Error ? err.message : 'Failed' }] as Analysis['recommendations']);
     } finally {
       setRightsizeLoading(false);
     }

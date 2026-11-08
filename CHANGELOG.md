@@ -1,8 +1,17 @@
 # Changelog
 
+## 1.4.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.3.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+### Improved
+- RightsizeTab: display right-size recommendations using structured RecommendationRow cards (matching WasteTab style) instead of raw JSON output
+- Type safety: RightsizeTab and AnalysisDetail rightsizeResults now typed as Analysis['recommendations']
+- package.json: updated author URL to alanvo.net
 
 ## 1.2.0 — work-in-progress checkpoint
 

@@ -1,10 +1,13 @@
+
 import { useState, FormEvent } from 'react';
 import { Input, Button } from './ui';
+import { RecommendationRow } from './RecommendationRow';
+import type { Analysis } from '../types/api';
 
 interface RightsizeTabProps {
   completed: boolean;
   onRunRightsize: (resourceId: string) => Promise<void>;
-  rightsizeResults: unknown[];
+  rightsizeResults: Analysis['recommendations'];
   rightsizeLoading: boolean;
 }
 
@@ -38,10 +41,8 @@ export function RightsizeTab({ completed, onRunRightsize, rightsizeResults, righ
       </form>
       {rightsizeResults.length > 0 && (
         <div className="space-y-2">
-          {rightsizeResults.map((r, i) => (
-            <div key={i} className="p-3 border border-gray-200 rounded-lg">
-              <pre className="text-xs text-gray-700 whitespace-pre-wrap">{JSON.stringify(r, null, 2)}</pre>
-            </div>
+          {rightsizeResults.map((rec) => (
+            <RecommendationRow key={rec.id} rec={rec} />
           ))}
         </div>
       )}
