@@ -88,3 +88,11 @@ def test_user_to_dict(db_session):
     assert data["name"] == "Test User"
     assert "viewer" in data["roles"]
     assert "operator" in data["roles"]
+def test_realm_config(client):
+    """Test that realm configuration endpoint returns valid JSON."""
+    response = client.get("/api/auth/realm-config")
+    assert response.status_code == 200
+    config = response.json()
+    assert "realm" in config
+    assert "roles" in config
+    assert "clients" in config

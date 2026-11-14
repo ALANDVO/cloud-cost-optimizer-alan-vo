@@ -209,3 +209,17 @@ def saml_login():
 
 
 from datetime import datetime
+@router.get("/api/auth/realm-config")
+def get_realm_config():
+    """Return Keycloak realm configuration for import."""
+    import json
+    from pathlib import Path
+    from fastapi import HTTPException
+
+    config_path = Path(__file__).parent.parent.parent.parent / "keycloak" / "realm-export.json"
+    try:
+        with open(config_path) as f:
+            config = json.load(f)
+        return config
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to load realm config: {e}")
