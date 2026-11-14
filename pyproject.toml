@@ -1,6 +1,6 @@
 [project]
 name = "cloud-cost-optimizer-alan-vo"
-version = "1.0.0"
+version = "1.5.0"
 description = "AI-powered cloud cost analysis for AWS, GCP, and Azure"
 readme = "README.md"
 license = {text = "MIT"}
