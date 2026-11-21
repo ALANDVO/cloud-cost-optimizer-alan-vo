@@ -1,6 +1,15 @@
 # Changelog
 
+## 1.6.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.5.0 — work-in-progress checkpoint
+
+### Fixed
+- auth-sso: Fixed Keycloak realm config path in `/api/auth/realm-config` endpoint (was resolving to non-existent `backend/keycloak/realm-export.json`, now correctly resolves to repo root `keycloak/realm-export.json`)
+
+
 
 Partial code published for continued development. Known issues: STATUS.md.
 
