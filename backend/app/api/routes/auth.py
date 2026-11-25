@@ -216,7 +216,7 @@ def get_realm_config():
     from pathlib import Path
     from fastapi import HTTPException
 
-    config_path = Path(__file__).parent.parent.parent.parent.parent / "keycloak" / "realm-export.json
+    config_path = Path(__file__).parent.parent.parent.parent.parent / "keycloak" / "realm-export.json"
     try:
         with open(config_path) as f:
             config = json.load(f)

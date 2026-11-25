@@ -83,15 +83,19 @@
     {
       "id": "auth-sso",
       "title": "OIDC/Keycloak Authentication with SAML Brokering",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "Keycloak realm import configuration",
         "Backend session management with HttpOnly cookies",
         "Frontend PKCE flow with in-memory tokens",
         "Demo mode for localhost only"
       ],
-      "implementation": [],
-      "tests": []
+      "implementation": [
+        "backend/app/api/routes/auth.py:get_realm_config endpoint (syntax fix)"
+      ],
+      "tests": [
+        "backend/tests/test_auth.py:test_realm_config"
+      ]
     },
     {
       "id": "docker-ci",

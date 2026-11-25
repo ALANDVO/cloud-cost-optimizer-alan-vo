@@ -39,13 +39,17 @@ Tests: `frontend/src/pages/__tests__/Dashboard.test.tsx`, `frontend/src/pages/__
 
 ### auth-sso — OIDC/Keycloak Authentication with SAML Brokering
 
-Status: planned
+Status: in_progress
 
 Acceptance:
 - Keycloak realm import configuration
 - Backend session management with HttpOnly cookies
 - Frontend PKCE flow with in-memory tokens
 - Demo mode for localhost only
+
+Implementation: `backend/app/api/routes/auth.py:get_realm_config endpoint (syntax fix)`
+
+Tests: `backend/tests/test_auth.py:test_realm_config`
 
 ### docker-ci — Dockerfiles, Compose, and CI Pipeline
 
